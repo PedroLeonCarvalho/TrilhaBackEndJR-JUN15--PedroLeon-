@@ -36,6 +36,7 @@ public class Task {
     @Column(name = "finished")
     private boolean isFinished = false;
 
-
+    @Column(name = "active", nullable = true)
+    private boolean isActive = true;
 
 }

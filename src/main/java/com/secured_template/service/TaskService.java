@@ -6,6 +6,9 @@ import com.secured_template.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class TaskService {
@@ -19,16 +22,7 @@ private final TaskRepository taskRepository;
     public void createTask(TaskDto dto) {
 
        dto.setStartDateTime(LocalDateTime.now());
-
-        Task task = new Task(dto.getId(),
-                dto.getUserId(),
-                dto.getTitle(),
-                dto.getDescription(),
-                dto.getStartDateTime(),
-                dto.getDeadLine(),
-                dto.isFinished());
-
-        taskRepository.save(task);
+        taskRepository.save(  dto.toEntity());
     }
 
 
@@ -36,7 +30,7 @@ private final TaskRepository taskRepository;
 
         var task = taskRepository.findTaskById(id);
 
-       task.setUserId(dto.getUserId());
+            task.setUserId(dto.getUserId());
             task.setTitle(dto.getTitle());
             task.setDescription(dto.getDescription());
             task.setStartDateTime(dto.getStartDateTime());
@@ -45,5 +39,31 @@ private final TaskRepository taskRepository;
 
         taskRepository.save(task);
     }
+
+    public void deleteTask(Long id) {
+       var task = taskRepository.findTaskById(id);
+        task.setActive(false);
+        taskRepository.save(task);
+        }
+
+    public List<TaskDto> listTasks() {
+        var taskList =taskRepository.findAllActiveTrue();
+
+        return
+        taskList.stream().map(task -> new TaskDto(
+                task.getId(),
+                task.getUserId(),
+                task.getTitle(),
+                task.getDescription(),
+                task.getStartDateTime(),
+                task.getDeadLine(),
+                task.isFinished(),
+                task.isActive()
+                ))
+                .toList();
+
+
+    }
+
 }
 
