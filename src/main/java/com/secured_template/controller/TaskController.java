@@ -1,6 +1,8 @@
 package com.secured_template.controller;
 
+import com.secured_template.dto.TaskDto;
 import com.secured_template.dto.UserDto;
+import com.secured_template.service.TaskService;
 import com.secured_template.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,23 +10,23 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/tasks")
 public class TaskController {
 
-  private final UserService userService;
+  private final TaskService taskService;
 
-    public TaskController(UserService userService) {
-        this.userService = userService;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @PostMapping
-    ResponseEntity<UserDto> createNewUser (@RequestBody UserDto user) {
-        var newUser =userService.createUser(user);
-        return new ResponseEntity(newUser, HttpStatus.CREATED);
+    ResponseEntity<TaskDto> createNewTask (@RequestBody TaskDto task) {
+        taskService.createTask(task);
+        return new ResponseEntity(task, HttpStatus.CREATED);
     }
-   @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/acaoRestrita")
-    ResponseEntity<String> acaoRestrita () {
-        return new ResponseEntity<String>("Ação restrita ao ADM realizada com sucesso", HttpStatus.CREATED); }
-
+    @PutMapping("/{id}")
+    ResponseEntity<TaskDto> updateTask (@PathVariable(name = "id") Long id , @RequestBody TaskDto task) {
+        taskService.updateTask(id, task);
+        return new ResponseEntity(task, HttpStatus.CREATED);
+    }
 }

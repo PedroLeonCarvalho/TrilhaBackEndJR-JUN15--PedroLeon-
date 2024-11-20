@@ -29,12 +29,12 @@ public class Task {
 
     @Column(name = "start_date_time")
     private LocalDateTime startDateTime;
+
     @Column(name = "dead_line")
     private Date deadLine;
 
     @Column(name = "finished")
-    private boolean isFinished;
-
+    private boolean isFinished = false;
 
 
 
