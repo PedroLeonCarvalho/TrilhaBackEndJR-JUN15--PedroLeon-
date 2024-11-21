@@ -8,8 +8,8 @@
 		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.secured_template</groupId>
-	<artifactId>secured-template</artifactId>
+	<groupId>com.codigo-certo-api</groupId>
+	<artifactId>codigo-certo-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Spring Security Template</name>
 	<description>Demo project for Spring Security</description>
