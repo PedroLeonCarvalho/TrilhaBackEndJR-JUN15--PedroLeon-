@@ -16,4 +16,4 @@ RUN mkdir /app/data
 EXPOSE 8080
 
 # Comando para rodar a aplicação
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar", "--server.port=${PORT}"]
