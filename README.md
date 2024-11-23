@@ -3,6 +3,10 @@
 # 📚 Trilha Inicial BackEnd Jr
 Este projeto tem como objetivo desenvolver uma API RESTful para gerenciamento de tarefas, proporcionando funcionalidades de CRUD (Create, Read, Update, Delete) de tarefas, autenticação de usuários e armazenamento dos dados em um banco de dados.
 
+Link de acesso da API rodando na AWS
+
+http://ec2-18-188-193-224.us-east-2.compute.amazonaws.com:8080/swagger-ui/index.html#/
+
 ## Objetivos:
 - Criar uma API que permita CRUD (Create, Read, Update, Delete) de tarefas.
 - Implementar autenticação de usuários.
